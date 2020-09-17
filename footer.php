@@ -1,22 +1,20 @@
+<footer>
+    <?php
+        $args = array(
+            'theme_location' => 'header-menu',
+            'container' => 'nav',
+            'after' => '<span class="separator"> | </span>'
+        );
 
-    <footer class="site-footer container">
-        <div class="footer-content">
-            <?php
-                $args = array(
-                    'theme_location' => 'main-menu', 
-                    'container' => 'nav', 
-                    'container_class' => 'footer-menu'
-                );
-                wp_nav_menu($args);
-            ?>
+        wp_nav_menu($args);
+     ?>
 
-            <p class="copyright">All Rights Reserved. <?php echo get_bloginfo('name') . " " . date('Y'); ?>
-
-
-        </div>
-
-    </footer>
-    <?php wp_footer(); ?>            
-
+     <div class="location">
+     <p>2754 Ocean Avenue Pallo Alto, CA 90481</p>
+     <p>Phone: 777-777-7777</p>
+     </div>
+     <p class="copyright">All Rights Reserved <?php echo date('Y'); ?></p>
+</footer>
+<?php wp_footer(); ?>
 </body>
 </html>

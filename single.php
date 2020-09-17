@@ -1,10 +1,3 @@
 <?php get_header(); ?>
-
-<main class="container page section with-sidebar">
-    <div class="page-content">
-        <?php get_template_part('template-parts/page', 'loop'); ?>
-    </div>
-    <?php get_sidebar(); ?>
-</main>
-
+    <h1>Hello forn single.php</h1>
 <?php get_footer(); ?>

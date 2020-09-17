@@ -1,39 +1,16 @@
-jQuery(document).ready(function($){
-    
-    // Make the menu responsive
-    $('#menu-main-navigation').slicknav({
-        // appendTo : '.site-header'
-    });
+$ = jQuery.noConflict();
+// A $( document ).ready() block.
+$( document ).ready(function() {
+    $('.mobile-menu a').on('click', function() {
+        $('nav.site-nav').toggle('slow');
+    })
 
-    // Run the bxSlider library on testimonials
-    $('.testimonials-list').bxSlider({
-        controls: false, 
-        mode: 'fade'
-    });
-
-    // When the page is ready add the fixed menu if position is greater than 300px
-    const headerScroll = document.querySelector('.navigation-bar');
-    const rect = headerScroll.getBoundingClientRect();
-    const topDistance = Math.abs(rect.top);
-    fixedMenu(topDistance);
-
+    var breakpoint = 768;
+    $(winodw).resize(function() {
+        if($(document).width() >= breakpoint) {
+            $('nav.site-nav').show();
+        } else {
+            $('nav.site-nav').hide();
+        }
+    })
 });
-
-
-window.onscroll = () => {
-    const scroll = window.scrollY;
-    
-    fixedMenu(scroll);
-}
-
-// Adds a fixed menu on top
-function fixedMenu(scroll) {
-    const headerScroll = document.querySelector('.navigation-bar');
-
-    // In the case that the scroll is greater than 300 add some classes
-    if(scroll > 300) {
-        headerScroll.classList.add('fixed-top');
-    } else {
-        headerScroll.classList.remove('fixed-top');
-    }
-}
