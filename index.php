@@ -1,3 +1,1 @@
-<?php get_header(); ?>
-FERNANDO CASTANON
-<?php get_footer(); ?>
+<?php echo "hello from index page"; ?>
