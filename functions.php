@@ -1,98 +1,86 @@
-<?php
-function lapizzeria_setup() {
-    // add thumbnails
-    add_theme_support('post-thumbnails');
-    add_image_size('boxes', 437, 291, true);
-    add_image_size('special', 768, 515, true);
+<?php 
+function load_scripts() {
+	wp_enqueue_script( 'bootstrap-js', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js', array('jquery'), '4.5.2', true);
+  wp_enqueue_style( 'bootstrap-css', 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css', array(), '4.5.2', 'all' );
+  wp_enqueue_style('template', get_template_directory_uri() . '/css/template.css', array(), '1.0', 'all');
+}
+add_action('wp_enqueue_scripts', 'load_scripts');
+
+
+
+function firsttheme_config() {
+  function register_my_menus() {
+  register_nav_menus(
+    array(
+      'header-menu' => __( 'Header Menu' ),
+      'extra-menu' => __( 'Extra Menu' ),
+      'footer-menu' => __( 'Footer Menu' )
+    )
+  );
+}
+add_action( 'init', 'register_my_menus' );
+
+$args = array(
+  'height' => 225,
+  'width' => 1920
+);
+
+add_theme_support('custom-header', $args);
+add_theme_support('post-thumbnails');
+add_theme_support('post-formats', 'video', 'image');
+add_theme_support( 'title-tag' );
 }
 
-add_action('after_setup_theme', 'lapizzeria_setup');
+add_action('after_setup_theme', 'firsttheme_config', 0);
+// register sidebar
+add_action('widgets_init', 'firsttheme_sidebar');
+function firsttheme_sidebar() {
+  register_sidebar(array(
+    'name' => 'Home Page Sidebar',
+    'id' => 'sidebar-1',
+    'description' => 'this is the home page sidebar',
+    'before_widget' => '<div class="widget-wrapper">',
+    'after_widget' => '</div>',
+    'before_title' => '<h2 class="widget-title">',
+    'after_title' => '</h2>'
+  ));
 
-function lapizzeria_styles() {
-    // add files
-    wp_enqueue_style('normalize', get_template_directory_uri() . '/css/normalize.css', array(), '8.0.1' );
-    wp_enqueue_style('fontawesome', 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', array(), '4.7.0' );
-    wp_enqueue_style('style', get_template_directory_uri() . '/style.css', array('normalize'), '1.0' );
-    // enqueue stylehseets
-    wp_enqueue_style('normalize');
-    wp_enqueue_style('fontawesome');
-    wp_enqueue_style('style');
-
-    wp_enqueue_script('script', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0', null, true);
-    // add javascript files
-    wp_enqueue_script('jquery');
-    wp_enqueue_script('script');
+  register_sidebar(array(
+    'name' => 'Blog Sidebar',
+    'id' => 'sidebar-2',
+    'description' => 'this is the blog page sidebar',
+    'before_widget' => '<div class="widget-wrapper">',
+    'after_widget' => '</div>',
+    'before_title' => '<h2 class="widget-title">',
+    'after_title' => '</h2>'
+  ));
+  // services area
+  register_sidebar(array(
+    'name' => 'Service 1',
+    'id' => 'services-1',
+    'description' => 'First service area',
+    'before_widget' => '<div class="widget-wrapper">',
+    'after_widget' => '</div>',
+    'before_title' => '<h2 class="widget-title">',
+    'after_title' => '</h2>'
+  ));
+  register_sidebar(array(
+    'name' => 'Service 2',
+    'id' => 'services-2',
+    'description' => 'Second service area',
+    'before_widget' => '<div class="widget-wrapper">',
+    'after_widget' => '</div>',
+    'before_title' => '<h2 class="widget-title">',
+    'after_title' => '</h2>'
+  ));
+  register_sidebar(array(
+    'name' => 'Service 3',
+    'id' => 'services-3',
+    'description' => 'Third service area',
+    'before_widget' => '<div class="widget-wrapper">',
+    'after_widget' => '</div>',
+    'before_title' => '<h2 class="widget-title">',
+    'after_title' => '</h2>'
+  ));
 }
-
-add_action( 'wp_enqueue_scripts', 'lapizzeria_styles' );
-
-// add menus
-function lapizzeria_menus() {
-    // register menus
-    register_nav_menus(array(
-        'header-menu' => __('Header Menu', 'lapizzeria'),
-        'social-menu' => __('Social Menu', 'lapizzeria')
-    ));
-}
-
-add_action('init', 'lapizzeria_menus');
-
-
-function lapizzeria_specialties() {
-	$labels = array(
-		'name'               => _x( 'Pizzas', 'lapizzeria' ),
-		'singular_name'      => _x( 'Pizza', 'post type singular name', 'lapizzeria' ),
-		'menu_name'          => _x( 'Pizzas', 'admin menu', 'lapizzeria' ),
-		'name_admin_bar'     => _x( 'Pizzas', 'add new on admin bar', 'lapizzeria' ),
-		'add_new'            => _x( 'Add New', 'book', 'lapizzeria' ),
-		'add_new_item'       => __( 'Add New Pizza', 'lapizzeria' ),
-		'new_item'           => __( 'New Pizzas', 'lapizzeria' ),
-		'edit_item'          => __( 'Edit Pizzas', 'lapizzeria' ),
-		'view_item'          => __( 'View Pizzas', 'lapizzeria' ),
-		'all_items'          => __( 'All Pizzas', 'lapizzeria' ),
-		'search_items'       => __( 'Search Pizzas', 'lapizzeria' ),
-		'parent_item_colon'  => __( 'Parent Pizzas:', 'lapizzeria' ),
-		'not_found'          => __( 'No Pizzas found.', 'lapizzeria' ),
-		'not_found_in_trash' => __( 'No Pizzas found in Trash.', 'lapizzeria' )
-	);
-
-	$args = array(
-		'labels'             => $labels,
-        'description'        => __( 'Description.', 'lapizzeria' ),
-		'public'             => true,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_menu'       => true,
-		'query_var'          => true,
-		'rewrite'            => array( 'slug' => 'specialties' ),
-		'capability_type'    => 'post',
-		'has_archive'        => true,
-		'hierarchical'       => false,
-		'menu_position'      => 6,
-		'supports'           => array( 'title', 'editor', 'thumbnail' ),
-    'taxonomies'          => array( 'category' ),
-	);
-
-	register_post_type( 'specialties', $args );
-}
-
-add_action( 'init', 'lapizzeria_specialties' );
-
-/**
- * WIDGETS ZONE
- */
-
- function lapizzeria_widgets() {
-	 register_sidebar(
-		 array(
-			'name' => 'Blog Sidebar',
-			'id' => 'blog_sidebar',
-			'before_widget' => '<div class="widget">',
-			'after_widget' => '</div>',
-			'before_title' => '<h3>',
-			'after_title' => '</h3>'
-		 )
-		 );
- }
-
- add_action('widgets_init', 'lapizzeria_widgets');
+?>

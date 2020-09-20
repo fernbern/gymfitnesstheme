@@ -1,50 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html <?php language_attributes(); ?>>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Pizzeria</title>
-    <?php wp_head(); ?>
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+	<header>
+		<section class="top-bar">
+			<div class="container">
+				<div class="row">
+					<div class="social-media-icons col-xl-9 col-md-7 col-sm-7 col-6">
+						<?php 
 
-<header class="site-header">
-<div class="container">
-    <div class="logo">
-        <a href="#<?php echo esc_url( home_url('/') ); ?>">
-            <img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="" class="logoimage">
-        </a>
-    </div>
-    <div class="header-information">
-        <div class="socials">
-            <?php 
-            wp_nav_menu( array( 
-                'theme_location' => 'social-menu',
-                'container' => 'nav',
-                'container_class' => 'socials',
-                'container_id' => 'socials',
-                'link_before' => '<span class="sr-text">',
-                'link_after' => '</span>' ) ); 
-            ?>
-        </div>
-        <div class="address">
-        <p>2754 Ocean Avenue Pallo Alto, CA 90481</p>
-        <p>Phone: 777-777-7777</p>
-        </div>
-    </div>
+						if( is_active_sidebar( 'social-media') ){
+							dynamic_sidebar( 'social-media' );
+						}
 
-    <div class="main-menu">
-        <div class="mobile-menu">
-            <a href="#" class="mobile"><i class="fa fa-bars"></i> Menu</a>
-        </div>
-        <div class="navigation container">
-        <?php wp_nav_menu( array( 
-            'theme_location' => 'header-menu', 
-            'container' => 'nav',
-            'container_class' => 'site-nav' ) ); 
-        ?>
-        <nav class="site-nav"></nav>
-        </div>
-    </div>
-</div>
-</header>
+						 ?>
+					</div>
+					<div class="search col-xl-3 col-md-5 col-sm-5 col-6 text-right"><?php get_search_form(); ?></div>					
+				</div>
+			</div>
+
+		</section>
+		<section class="menu-area">
+			<div class="container">				
+				<div class="row">
+					<div class="align">
+						<section class="logo col-md-2 col-sm-12 col-12 text-center"><?php the_custom_logo(); ?></section>
+						<nav class="main-menu col-md-10 text-right">
+							<?php wp_nav_menu( array( 'theme_location' => 'header-menu' ) ); ?>
+						</nav>					
+					</div>					
+				</div>
+			</div>				
+		</section>
+	</header>

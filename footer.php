@@ -1,19 +1,16 @@
 <footer>
-    <?php
-        $args = array(
-            'theme_location' => 'header-menu',
-            'container' => 'nav',
-            'after' => '<span class="separator"> | </span>'
-        );
-
-        wp_nav_menu($args);
-     ?>
-
-     <div class="location">
-     <p>2754 Ocean Avenue Pallo Alto, CA 90481</p>
-     <p>Phone: 777-777-7777</p>
-     </div>
-     <p class="copyright">All Rights Reserved <?php echo date('Y'); ?></p>
+	<div class="container">
+		<div class="row">
+			<div class="copyright col-sm-7 col-4">
+				<p>Copyright &copy; 2020 Fernando Castanon</p>
+			</div>
+			<div class="footer-menu col-sm-5 col-8 text-right">
+				<?php wp_nav_menu( array(
+					'theme_location'  => 'footer-menu'
+				) ); ?>
+			</div>
+		</div>
+	</div>
 </footer>
 <?php wp_footer(); ?>
 </body>
