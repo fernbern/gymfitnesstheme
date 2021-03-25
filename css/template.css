@@ -161,3 +161,9 @@ footer{ background: #000; padding: 15px 0; color: #fcfae1; }
 .has-white-color{
     color: #ffffff;
 }
+.container-test {
+  width: 30%;
+  position: relative;
+  margin-left: 15px;
+  padding-left: 15px
+}
