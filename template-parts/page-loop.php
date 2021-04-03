@@ -16,6 +16,8 @@
                 <?php  echo the_field('class_days') . " -  " .  $start_time . " to " . $end_time ?>
             </p>
         <?php  endif; ?>
+// awesome
 
     <?php the_content(); ?>
 <?php endwhile; ?>
+console.log('test file');
